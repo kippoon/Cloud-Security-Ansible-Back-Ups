@@ -4,7 +4,7 @@ Backups of all lessons and scripts written for Cloud Security and Networking
 
 The files in this repository were used to configure the network depicted below.
 
-Diagrams/KI_Cloud_Infrastructure_Network_Diagram.drawio
+https://github.com/kippoon/Cloud-Security-Ansible-Back-Ups/blob/main/Diagrams/KI_Cloud_Infrastructure_Network_Diagram.drawio
 
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above or to install only certain pieces of it, such as Filebeat.
 
