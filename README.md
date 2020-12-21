@@ -4,7 +4,7 @@ Backups of all lessons and scripts written for Cloud Security and Networking
 
 The files in this repository were used to configure the network depicted below.
 
-![TODO: Update the path with the name of your diagram](Images/diagram_filename.png)
+Diagrams/KI_Cloud_Infrastructure_Network_Diagram.drawio
 
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above or to install only certain pieces of it, such as Filebeat.
 
