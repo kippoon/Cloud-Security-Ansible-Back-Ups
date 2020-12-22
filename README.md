@@ -40,29 +40,31 @@ The configuration details of each machine may be found below.
 
 The machines on the internal network are not exposed to the public Internet. 
 
-Only the _____ machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
-- _TODO: Add whitelisted IP addresses_
+Only the Jumpbox/10.0.0.4 machine can accept connections from the Internet. Access to this machine is only allowed from the Host IP address and other machines on the virtual network (10.0.0.4 - 10.0.0.8).
 
-Machines within the network can only be accessed by _____.
-- _TODO: Which machine did you allow to access your ELK VM? What was its IP address?_
+Machines within the network can only be accessed by first connecting to the Jumpbox and then attaching to the corresponding container; unless the DVWA is exposed. The ELK VM is accessible via whitelisted Host IP and virtual network (10.0.0.4 - 10.0.0.8) IP addresses.
 
 A summary of the access policies in place can be found in the table below.
 
-| Name     | Publicly Accessible | Allowed IP Addresses |
-|----------|---------------------|----------------------|
-| Jump Box | Yes/No              | 10.0.0.1 10.0.0.2    |
-|          |                     |                      |
-|          |                     |                      |
+| Name    | Publicly Accessible | Allowed IP Addresses      |
+|---------|---------------------|---------------------------|
+| Jumpbox | Yes                 | Host,                     |
+| Web-1   | No                  | 10.0.0.4 - 10.0.0.8       |
+| Web-2   | No                  | 10.0.0.4 - 10.0.0.8       |
+| ELKy    | No                  | 10.0.0.4 - 10.0.0.8, Host |
+| Web-3   | No                  | 10.0.0.4 - 10.0.0.8       |
 
 ### Elk Configuration
 
-Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because...
-- _TODO: What is the main advantage of automating configuration with Ansible?_
+Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because it eliminates any human error and saves time when setting up multiple environments.
 
 The playbook implements the following tasks:
-- _TODO: In 3-5 bullets, explain the steps of the ELK installation play. E.g., install Docker; download image; etc._
-- ...
-- ...
+- Increases container memory to allow it to run ELK 
+- Installs Docker onto the ELK server
+- Installs Python
+- Installs the Python Docker module
+- Downloads and Launches the ELK Container
+- Enables docker service
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
@@ -70,10 +72,14 @@ The following screenshot displays the result of running `docker ps` after succes
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
-- _TODO: List the IP addresses of the machines you are monitoring_
+- Jumpbox-Provisioner/10.0.0.4
+- Web-1/10.0.0.5
+- Web-2/10.0.0.6
+- Web-3/10.0.0.8
 
 We have installed the following Beats on these machines:
-- _TODO: Specify which Beats you successfully installed_
+- Filebeat
+- Metricbeat
 
 These Beats allow us to collect the following information from each machine:
 - _TODO: In 1-2 sentences, explain what kind of data each beat collects, and provide 1 example of what you expect to see. E.g., `Winlogbeat` collects Windows logs, which we use to track user logon events, etc._
@@ -82,9 +88,9 @@ These Beats allow us to collect the following information from each machine:
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
 
 SSH into the control node and follow the steps below:
-- Copy the _____ file to _____.
-- Update the _____ file to include...
-- Run the playbook, and navigate to ____ to check that the installation worked as expected.
+- Copy the filebeat-config.yml file to the ELK container
+- Update the filebeat-config.yml file to include the ELK server IP address (on line #1106&1806) with corresponding ports (9200&5601)
+- Run the playbook, and navigate to the Filebeat installation page on the ELK server GUI to check that the installation worked as expected.
 
 _TODO: Answer the following questions to fill in the blanks:_
 - _Which file is the playbook? Where do you copy it?_
