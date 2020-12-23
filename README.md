@@ -82,7 +82,8 @@ We have installed the following Beats on these machines:
 - Metricbeat
 
 These Beats allow us to collect the following information from each machine:
-- _TODO: In 1-2 sentences, explain what kind of data each beat collects, and provide 1 example of what you expect to see. E.g., `Winlogbeat` collects Windows logs, which we use to track user logon events, etc._
+- Filebeat allows us to collect and centralize log data like system.log, wifi.log, error.log, etc. via harvesters that can then be forwarded to Logstash or Elasticsearch for analysis.
+- Metricbeat allows us to collect metrics and statistics such as timestamps, dates, geolocation, etc. and insert them directly into Logstash or Elasticsearch for analysis also.
 
 ### Using the Playbook
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
@@ -92,9 +93,24 @@ SSH into the control node and follow the steps below:
 - Update the filebeat-config.yml file to include the ELK server IP address (on line #1106&1806) with corresponding ports (9200&5601)
 - Run the playbook, and navigate to the Filebeat installation page on the ELK server GUI to check that the installation worked as expected.
 
-_TODO: Answer the following questions to fill in the blanks:_
-- _Which file is the playbook? Where do you copy it?_
-- _Which file do you update to make Ansible run the playbook on a specific machine? How do I specify which machine to install the ELK server on versus which to install Filebeat on?_
-- _Which URL do you navigate to in order to check that the ELK server is running?
 
 _As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._
+-docker start elk
+-curl https://gist.githubusercontent.com/slape/5cc350109583af6cbe577bbcc0710c93/raw/eca603b72586fbe148c11f9c87bf96a63cb25760/Filebeat to /etc/ansible/files/filebeat-config.yml
+-nano filebeat-config.yml
+  -edit output.elasticsearch host to ["10.1.0.4:9200"]
+  -edit setup.kibana host to ["10.1.0.4:5601"] 
+-save changes
+-curl https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.4.0-amd64.deb to  /etc/ansible/files/filebeat-7.4.0-amd64.deb
+-dpkg -i filebeat-7.4.0-amd64.deb
+-copy filebeat-config.yml from container to Web-VMs
+-filebeat modules enable system
+-filebeat setup
+-service metricbeat start
+-ansible-playbook filebeat-playbook.yml
+-curl https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-7.4.0-amd64.deb to /etc/ansible/files/metricbeat-7.4.0-amd64.deb
+-dpkg -i metricbeat-7.4.0-amd64.deb
+-update metric-config.yml from container to Web-VMs
+-metricbeat modules enable docker
+-metricbeat setup
+-metricbeat -e
