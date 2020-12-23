@@ -90,11 +90,11 @@ In order to use the playbook, you will need to have an Ansible control node alre
 
 SSH into the control node and follow the steps below:
 - Copy the filebeat-config.yml file to the ELK container
-- Update the filebeat-config.yml file to include the ELK server IP address (on line #1106&1806) with corresponding ports (9200&5601)
+- Update the filebeat-config.yml file to include the ELK server IP address with corresponding ports
 - Run the playbook, and navigate to the Filebeat installation page on the ELK server GUI to check that the installation worked as expected.
 
 
-As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._
+As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc.
 -docker start elk
 -curl https://gist.githubusercontent.com/slape/5cc350109583af6cbe577bbcc0710c93/raw/eca603b72586fbe148c11f9c87bf96a63cb25760/Filebeat to /etc/ansible/files/filebeat-config.yml
 -nano filebeat-config.yml
