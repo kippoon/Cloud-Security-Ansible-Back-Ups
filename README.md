@@ -93,24 +93,23 @@ SSH into the control node and follow the steps below:
 - Update the filebeat-config.yml file to include the ELK server IP address with corresponding ports
 - Run the playbook, and navigate to the Filebeat installation page on the ELK server GUI to check that the installation worked as expected.
 
-
-As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc.:
--docker start elk
--curl https://gist.githubusercontent.com/slape/5cc350109583af6cbe577bbcc0710c93/raw/eca603b72586fbe148c11f9c87bf96a63cb25760/Filebeat to /etc/ansible/files/filebeat-config.yml
--nano filebeat-config.yml
-  -edit output.elasticsearch host to ["10.1.0.4:9200"]
-  -edit setup.kibana host to ["10.1.0.4:5601"] 
--save changes
--curl https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.4.0-amd64.deb to  /etc/ansible/files/filebeat-7.4.0-amd64.deb
--dpkg -i filebeat-7.4.0-amd64.deb
--copy filebeat-config.yml from container to Web-VMs
--filebeat modules enable system
--filebeat setup
--service metricbeat start
--ansible-playbook filebeat-playbook.yml
--curl https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-7.4.0-amd64.deb to /etc/ansible/files/metricbeat-7.4.0-amd64.deb
--dpkg -i metricbeat-7.4.0-amd64.deb
--update metric-config.yml from container to Web-VMs
--metricbeat modules enable docker
--metricbeat setup
--metricbeat -e
+_As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._
+- docker start elk
+- curl https://gist.githubusercontent.com/slape/5cc350109583af6cbe577bbcc0710c93/raw/eca603b72586fbe148c11f9c87bf96a63cb25760/Filebeat to /etc/ansible/files/filebeat-config.yml
+- nano filebeat-config.yml
+  - edit output.elasticsearch host to ["10.1.0.4:9200"]
+  - edit setup.kibana host to ["10.1.0.4:5601"] 
+- save changes
+- curl https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.4.0-amd64.deb to  /etc/ansible/files/filebeat-7.4.0-amd64.deb
+- dpkg -i filebeat-7.4.0-amd64.deb
+- copy filebeat-config.yml from container to Web-VMs
+- filebeat modules enable system
+- filebeat setup
+- service metricbeat start
+- ansible-playbook filebeat-playbook.yml
+- curl https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-7.4.0-amd64.deb to /etc/ansible/files/metricbeat-7.4.0-amd64.deb
+- dpkg -i metricbeat-7.4.0-amd64.deb
+- update metric-config.yml from container to Web-VMs
+- metricbeat modules enable docker
+- metricbeat setup
+- metricbeat -e
